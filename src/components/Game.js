@@ -16,13 +16,13 @@ class Game extends Component {
   jumpTo(step) {
     this.setState({
       stepNumber: step,
-      xIsNext: (step%2)===0
+      xIsNext: (step%2) === 0
     })
   }
 
   handleClick(i) {
-    const history = this.state.history.slice(0, this.state.stepNumber+1);
-    const current = history[history.length-1];
+    const history = this.state.history.slice(0, this.state.stepNumber + 1);
+    const current = history[history.length - 1];
     const squares = current.squares.slice();
     const winner = calculateWinner(squares);
     if(winner || squares[i]) {
@@ -42,8 +42,8 @@ class Game extends Component {
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-    const squares = current.squares.slice();
-    const winner = calculateWinner(squares);
+    const winner = calculateWinner(current.squares);
+
     const moves =  history.map((step, move) => {
       const desc = move ? 'Go to #' + move : 'Start the game';
       return (
@@ -60,7 +60,6 @@ class Game extends Component {
     } else {
       status = 'Next player is ' + (this.state.xIsNext ? 'X' : 'O');
     }
-
     return (
       <div className="game">
         <div className="game-board">
